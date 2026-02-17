@@ -20,6 +20,8 @@ const[hov,setHov]=useState(null);
 const[nc,setNc]=useState(3);
 const[fade,setFade]=useState(false);
 useEffect(()=>setFade(true),[]);
+const stars=Array.from({length:40},(_,i)=>({i,x:Math.random()*100,y:Math.random()*100,s:Math.random()*2+1,d:Math.random()*4,dur:Math.random()*3+2}));
+
 const L=nc===3?["Past","Present","Future"]:["Situation","Challenge","Subconscious","Past","Future"];
 const start=()=>{setDeck([...TAROT_DECK].sort(()=>Math.random()-0.5));setSel([]);setRev([]);setVideo("");setErr("");setPhase("spread");};
 const pick=i=>{if(sel.length>=nc||sel.includes(i))return;const n=[...sel,i];setSel(n);setTimeout(()=>setRev(p=>[...p,i]),300);if(n.length===nc)setTimeout(()=>setPhase("reading"),1200);};
@@ -79,11 +81,11 @@ const reset=()=>{setPhase("intro");setSel([]);setRev([]);setVideo("");setErr("")
 const bg={minHeight:"100vh",background:"linear-gradient(170deg,#080412,#0d0520 30%,#120a2a 60%,#080412)",display:"flex",alignItems:"center",justifyContent:"center",padding:20,position:"relative",overflow:"hidden"};
 const ctr={display:"flex",flexDirection:"column",alignItems:"center",gap:16,width:"100%",maxWidth:900,zIndex:1};
 if(phase==="intro")return(
-<div style={bg}><style>{CSS}</style>
+<div style={bg}><style>{CSS}</style><div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0}}>{stars.map(s=><div key={s.i} style={{position:"absolute",left:s.x+"%",top:s.y+"%",width:s.s,height:s.s,borderRadius:"50%",background:"rgba(255,255,255,0.7)",animation:"twinkle "+s.dur+"s ease-in-out "+s.d+"s infinite"}}/>)}</div>
 <div style={{...ctr,maxWidth:420,opacity:fade?1:0,transform:fade?"none":"translateY(30px)",transition:"all 1s ease"}}>
-<div style={{fontSize:42,color:"#d4af37",animation:"float 3s ease-in-out infinite",fontFamily:F}}>&#10022;</div>
-<h1 style={{fontFamily:F,fontSize:36,color:"#e8d5a3",margin:0,letterSpacing:8}}>Arcana Visio</h1>
-<p style={{fontFamily:F,fontSize:11,color:"#d4af37",margin:0,letterSpacing:5}}>AI TAROT VIDEO</p>
+<div style={{fontSize:42,color:"#d4af37",animation:"float 3s ease-in-out infinite",fontFamily:F}}>☽</div>
+<h1 style={{fontFamily:F,fontSize:36,color:"#e8d5a3",margin:0,letterSpacing:8}}>Lady Fantasy</h1>
+<p style={{fontFamily:F,fontSize:11,color:"#d4af37",margin:0,letterSpacing:5}}>AI TAROT CINEMA</p>
 <div style={{width:"100%",height:1,background:"linear-gradient(90deg,transparent,rgba(212,175,55,0.3),transparent)",margin:"8px 0"}}/>
 <p style={{fontFamily:G,fontSize:16,color:"rgba(232,213,163,0.5)",textAlign:"center",lineHeight:1.7}}>Draw from a full 78-card deck. AI weaves your cards into a mystical cinematic narrative.</p>
 <div style={{display:"flex",gap:8,width:"100%"}}>
@@ -102,7 +104,7 @@ if(phase==="intro")return(
 </div></div>);
 
 if(phase==="spread")return(
-<div style={bg}><style>{CSS}</style>
+<div style={bg}><style>{CSS}</style><div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0}}>{stars.map(s=><div key={s.i} style={{position:"absolute",left:s.x+"%",top:s.y+"%",width:s.s,height:s.s,borderRadius:"50%",background:"rgba(255,255,255,0.7)",animation:"twinkle "+s.dur+"s ease-in-out "+s.d+"s infinite"}}/>)}</div>
 <div style={ctr}>
 <h2 style={{fontFamily:F,fontSize:20,color:"#d4af37",margin:0,letterSpacing:4}}>{sel.length<nc?`Choose a Card (${sel.length}/${nc})`:"Revealing..."}</h2>
 <p style={{fontFamily:G,fontSize:15,color:"rgba(232,213,163,0.5)",margin:0}}>{sel.length<nc&&`Select for: ${L[sel.length]}`}</p>
@@ -122,14 +124,14 @@ border:sel.includes(i)?"1px solid #d4af37":hov===i?"1px solid rgba(212,175,55,0.
 display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.25s",
 transform:hov===i&&!sel.includes(i)?"translateY(-10px) scale(1.06)":"scale(1)",
 opacity:sel.includes(i)?0.3:1}}>
-<span style={{fontSize:14,color:"rgba(212,175,55,0.25)",fontFamily:F}}>&#10022;</span>
+<span style={{fontSize:14,color:"rgba(212,175,55,0.25)",fontFamily:F}}>☽</span>
 </div>)}
 </div>
 <p style={{fontFamily:G,fontSize:11,color:"rgba(232,213,163,0.2)"}}>78 cards</p>
 </div></div>);
 
 if(phase==="reading"){const cs=gc();return(
-<div style={bg}><style>{CSS}</style>
+<div style={bg}><style>{CSS}</style><div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0}}>{stars.map(s=><div key={s.i} style={{position:"absolute",left:s.x+"%",top:s.y+"%",width:s.s,height:s.s,borderRadius:"50%",background:"rgba(255,255,255,0.7)",animation:"twinkle "+s.dur+"s ease-in-out "+s.d+"s infinite"}}/>)}</div>
 <div style={{...ctr,maxWidth:700}}>
 <h2 style={{fontFamily:F,fontSize:24,color:"#d4af37",margin:0,letterSpacing:4}}>Your Cards</h2>
 <div style={{display:"flex",gap:32,justifyContent:"center",flexWrap:"wrap",margin:"20px 0"}}>
@@ -150,7 +152,7 @@ if(phase==="reading"){const cs=gc();return(
 </div></div></div>);}
 
 if(phase==="gen"){const cs=gc();return(
-<div style={bg}><style>{CSS}</style>
+<div style={bg}><style>{CSS}</style><div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0}}>{stars.map(s=><div key={s.i} style={{position:"absolute",left:s.x+"%",top:s.y+"%",width:s.s,height:s.s,borderRadius:"50%",background:"rgba(255,255,255,0.7)",animation:"twinkle "+s.dur+"s ease-in-out "+s.d+"s infinite"}}/>)}</div>
 <div style={{...ctr,maxWidth:400}}>
 <div style={{position:"relative",width:90,height:90}}>
 <div style={{position:"absolute",inset:0,borderRadius:"50%",border:"2px solid rgba(212,175,55,0.3)",animation:"spin 3s linear infinite"}}/>
@@ -169,7 +171,7 @@ if(phase==="gen"){const cs=gc();return(
 </div></div>);}
 
 if(phase==="result"){const cs=gc();return(
-<div style={bg}><style>{CSS}</style>
+<div style={bg}><style>{CSS}</style><div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0}}>{stars.map(s=><div key={s.i} style={{position:"absolute",left:s.x+"%",top:s.y+"%",width:s.s,height:s.s,borderRadius:"50%",background:"rgba(255,255,255,0.7)",animation:"twinkle "+s.dur+"s ease-in-out "+s.d+"s infinite"}}/>)}</div>
 <div style={{...ctr,maxWidth:660}}>
 <h2 style={{fontFamily:F,fontSize:24,color:"#d4af37",letterSpacing:4}}>Your Vision</h2>
 <div style={{width:"100%",borderRadius:12,overflow:"hidden",border:"2px solid rgba(212,175,55,0.3)",boxShadow:"0 10px 50px rgba(212,175,55,0.15)"}}>
@@ -191,4 +193,5 @@ const CSS=`@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes loading{0%{width:0;margin-left:0}50%{width:60%;margin-left:20%}100%{width:0;margin-left:100%}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-button:hover{filter:brightness(1.15)}`;
+button:hover{filter:brightness(1.15)}
+@keyframes twinkle{0%,100%{opacity:0.1;transform:scale(0.5)}50%{opacity:1;transform:scale(1.2)}}`;
